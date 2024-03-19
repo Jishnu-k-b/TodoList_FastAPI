@@ -7,7 +7,7 @@ The repo contains a Todo List API which is created using FastAPI as framework an
 Clone the project
 
 ```bash
-  git clone https://github.com/Jishnu-k-b/TodoList_FastAPI
+  git clone https://github.com/Jishnu-k-b/TodoList_FastAPI.git
 ```
 
 Go to the project directory
