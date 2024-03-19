@@ -1,7 +1,9 @@
-from fastapi import HTTPException, APIRouter, Depends
-from typing import Optional
 from bson import ObjectId
+from typing import Optional
 from jose import jwt, JWTError
+
+from fastapi import HTTPException, APIRouter, Depends
+from fastapi.responses import RedirectResponse
 
 from ..models.todo import Todo
 from ..database import db_conn
@@ -11,6 +13,11 @@ from ..config.config import SECRET_KEY, ALGORITHM
 router = APIRouter()
 
 collection = db_conn.get_todo_collection()
+
+
+@router.get("/", include_in_schema=False)
+async def home():
+    return RedirectResponse(url="/docs")
 
 
 # Create todo for authenticated user
