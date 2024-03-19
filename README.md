@@ -7,13 +7,13 @@ The repo contains a Todo List API which is created using FastAPI as framework an
 Clone the project
 
 ```bash
-  git clone
+  git clone https://github.com/Jishnu-k-b/TodoList_FastAPI
 ```
 
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd TodoList_FastAPI
 ```
 
 Create a virtual environment
