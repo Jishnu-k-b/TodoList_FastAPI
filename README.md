@@ -42,4 +42,4 @@ python run.py
 
 ## Screenshots
 
-![API docs](/relative/path/to/img.jpg?raw=true "API Docs")
+![API docs](screenshots/api-docs.png?raw=true "API Docs")
