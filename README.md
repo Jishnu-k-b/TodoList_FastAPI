@@ -27,8 +27,17 @@ Install the requirements
 ```bash
 pip install -r requirements.txt
 ```
+Make sure you have installed MongoDB in your system.
 
-Start the server (setup the config file before running the project)
+```bash
+Create a database in MongoDB:
+todo_db
+Create collections:
+1. todos
+2. users
+```
+
+Start the server (setup the config file and database connection before running the project)
 
 ```bash
 uvicorn core.main:app --reload
