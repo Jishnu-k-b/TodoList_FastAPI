@@ -43,3 +43,8 @@ python run.py
 ## Screenshots
 
 ![API docs](screenshots/api-docs.png?raw=true "API Docs")
+![API docs](screenshots/user-reg.png?raw=true "User reg")
+![API docs](screenshots/create-todo.png?raw=true "Create todo")
+![API docs](screenshots/view-all-todos.png?raw=true "View all todo")
+![API docs](screenshots/update-a-todo.png?raw=true "Update")
+![API docs](screenshots/delete-a-todo.png?raw=true "Delete")
