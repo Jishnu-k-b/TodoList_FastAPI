@@ -10,7 +10,7 @@ router = APIRouter()
 # MongoDb connection
 client = MongoClient("mongodb://localhost:27017/")
 db = client["todo_db"]
-collection = db["todo"]
+collection = db["todos"]
 
 
 # Create todo
