@@ -1,58 +1,16 @@
-from fastapi import HTTPException, APIRouter, Depends, status
-from fastapi.security import OAuth2PasswordRequestForm
-from pymongo import MongoClient
+from fastapi import HTTPException, APIRouter, Depends
 from typing import Optional
 from bson import ObjectId
-from datetime import timedelta
 from jose import jwt, JWTError
-from .models import Todo, User
-from .auth import (
-    pwd_context,
-    users_collection,
-    ACCESS_TOKEN_EXPIRE_MINUTES,
-    authenticate_user,
-    create_access_token,
-    SECRET_KEY,
-    ALGORITHM,
-    oauth2_scheme,
-)
+
+from ..models.todo import Todo
+from ..database import db_conn
+from ..auth.auth import oauth2_scheme
+from ..config.config import SECRET_KEY, ALGORITHM
 
 router = APIRouter()
 
-# MongoDb connection
-client = MongoClient("mongodb://localhost:27017/")
-db = client["todo_db"]
-collection = db["todos"]
-
-
-# User registration
-@router.post("/register/", response_model=User)
-async def register_user(user: User):
-    user_dict = user.model_dump()
-    user_dict["password"] = pwd_context.hash(user_dict["password"])
-    inserted_id = users_collection.insert_one(user_dict).inserted_id
-    user_dict["_id"] = str(inserted_id)
-    return user_dict
-
-
-# User login
-@router.post("/token/")
-async def login_for_access_token(
-    form_data: OAuth2PasswordRequestForm = Depends(),
-):
-    user = authenticate_user(form_data.username, form_data.password)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Incorrect username or password",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-
-    access_token_expires = timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    access_token = create_access_token(
-        data={"sub": user.username}, expires_delta=access_token_expires
-    )
-    return {"access_token": access_token, "token_type": "bearer"}
+collection = db_conn.get_todo_collection()
 
 
 # Create todo for authenticated user
